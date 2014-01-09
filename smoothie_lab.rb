@@ -54,7 +54,7 @@ def blend(smoothie_ingredients)
 
   # output the new mixed up string
   puts combined_ingredients
-  
+
 end
  
  
@@ -66,5 +66,23 @@ end
  
 class Blender
  
+  # define instance_variable
+  attr_accessor :switch
+  
+  # class instantiator, defaults switch to off
+  def initialize()
+    @switch = "off"
+  end
+
+  # define setter for switch - must be a valid value of 'on' or 'off'.
+  def switch=(state)
+    valid_states = ["on", "off"]      # ask about efficiency / scope of this array`
+    if valid_states.include?(state)
+      @switch = state
+    else
+      puts "Invalid switch state. use #{valid_states}."
+    end
+  end
  
 end
+
