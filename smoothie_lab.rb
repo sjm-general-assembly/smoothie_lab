@@ -42,9 +42,8 @@ def blend(smoothie_ingredients)
   ingredients = smoothie_ingredients.keys
 
   # concatenate all ingredients in to one long string
-  combined_ingredients = ""
-  ingredients.each { |ingredient| combined_ingredients += ingredient }
-
+  combined_ingredients = ingredients.join
+  
   # remove all spaces
   combined_ingredients.delete!(" ")
 
@@ -59,7 +58,8 @@ end
  
  
 # create a class called Blender
-# It should have a method that takes an array of ingredients and returns a mixed string of characters.
+# It should have a method that takes an array of ingredients and returns a 
+# mixed string of characters.
 # Give the blender an on and off switch and only allow the blender to function when it's on.
 # FOR SAFETY'S SAKE When you create a new blender by default it should be off.
 # Blend the the smoothie array
@@ -76,7 +76,10 @@ class Blender
 
   # define setter for switch - must be a valid value of 'on' or 'off'.
   def switch=(state)
-    valid_states = ["on", "off"]      # ask about efficiency / scope of this array`
+
+    # I took 'on' and 'off' literally I guess. (could have used a boolean)
+    valid_states = ["on", "off"]      
+   
     if valid_states.include?(state)
       @switch = state
     else
@@ -84,5 +87,35 @@ class Blender
     end
   end
  
+   # a method that mixes and shows all the letters of the ingredients, minus spaces
+   # NOTE: blender must be turned 'on'before it can blend!
+   def blend(ingredients_and_measurements)
+
+    if self.switch == "on"
+      # extract just the ingredients (keys) from the list, pitch the measurement (values)
+      ingredients = ingredients_and_measurements.keys
+
+      # concatenate all ingredients in to one long string
+      combined_ingredients = ingredients.join
+
+      # remove all spaces
+      combined_ingredients.delete!(" ")
+
+      # mix up the characters
+      ingredients_array = combined_ingredients.chars         # convert to an array for easy mixing
+      combined_ingredients = ingredients_array.shuffle.join  # shuffle, then convert back to string
+
+      # output the new mixed up string
+      puts combined_ingredients
+    else
+      puts "You must turn the blender switch on before trying to blend!"
+    end
+  end
+
 end
+
+my_blender = Blender.new
+my_blender.blend(smoothie_ingredients)
+my_blender.switch = "on"
+my_blender.blend(smoothie_ingredients)
 
